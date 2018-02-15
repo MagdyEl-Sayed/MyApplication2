@@ -1,4 +1,4 @@
-package com.example.gm7.myapplication;
+package com.example.gm7.myapplication.model.data;
 
 /**
  * Created by GM7 on 27/12/2017.
@@ -60,7 +60,7 @@ Context context;
      */
 
     // Adding new contact
-    void addContact(Contact contact) {
+    public void addContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -70,7 +70,7 @@ Context context;
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
         db.close(); // Closing database connection
-        Toast.makeText(context, "Contact added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,contact.getID()+">>>"+contact.getUserName()+">>>"+contact.getUserPhone() , Toast.LENGTH_SHORT).show();
     }
 
 
@@ -99,6 +99,14 @@ Context context;
         // return contact list
         return contactList;
     }
+    // Getting contacts Count
+    public int getContactsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
 
+        // return count
+        return cursor.getCount();
+    }
 
 }
