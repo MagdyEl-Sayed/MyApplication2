@@ -3,35 +3,41 @@ package com.example.gm7.myapplication.presenter;
 import android.content.Context;
 
 import com.example.gm7.myapplication.model.data.Contact;
-import com.example.gm7.myapplication.model.source.TaskContract;
-import com.example.gm7.myapplication.model.source.TasksDataSource;
+import com.example.gm7.myapplication.model.source.save.SaveTasksDataSource;
+import com.example.gm7.myapplication.model.source.show.ShowTaskContract;
+import com.example.gm7.myapplication.model.source.show.ShowTasksDataSource;
+
+import java.util.List;
 
 /**
  * Created by GM7 on 2018-02-15.
  */
 
-public class ShowPresenter implements TaskContract.Presenter {
-    TaskContract.View view;
-    TasksDataSource tasksDataSource;
+public class ShowPresenter implements ShowTaskContract.Presenter {
+    ShowTaskContract.View view;
+    ShowTasksDataSource showTasksDataSource;
 
-    public ShowPresenter(TaskContract.View view, TasksDataSource tasksDataSource) {
+    public ShowPresenter(ShowTaskContract.View view, ShowTasksDataSource showTasksDataSource) {
         this.view = view;
-        this.tasksDataSource = tasksDataSource;
+        this.showTasksDataSource = showTasksDataSource;
     }
 
+
     @Override
-    public void saveContact(Context context, Contact contact) {
-        tasksDataSource.saveContacts(context, contact, new TasksDataSource.SaveContactsCallBack() {
+    public void getContact(Context context) {
+        showTasksDataSource.getContacts(context, new ShowTasksDataSource.ShowContactsCallBack() {
+
             @Override
-            public void onContactSaved(Contact contact) {
-                view.saveSuccess("Contact is Saved");
+            public void onContactLoaded(List<Contact> contactList) {
+                view.showSuccess("Contact is Saved");
+                view.showTasks(contactList);
             }
 
             @Override
-            public void onContactFailed(String errorMessage) {
-                view.saveFailed("Contact isn't Saved");
+                    public void onContactFailed(String errorMessage) {
+                        view.showFailed("Contact isn't Saved");
 
-            }
-        });
+                    }
+                });
     }
 }

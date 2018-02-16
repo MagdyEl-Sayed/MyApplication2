@@ -35,7 +35,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
 
     }
-
+    public void replaceData(List<Contact> contactList){
+        if (contactList != null){
+            userList=contactList;
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return userList.size();

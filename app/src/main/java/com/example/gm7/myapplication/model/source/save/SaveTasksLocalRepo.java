@@ -1,4 +1,4 @@
-package com.example.gm7.myapplication.model.source;
+package com.example.gm7.myapplication.model.source.save;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -10,12 +10,12 @@ import com.example.gm7.myapplication.model.data.DatabaseHandler;
  * Created by GM7 on 2018-02-15.
  */
 
-public class TasksLocalRepo implements TasksDataSource {
+public class SaveTasksLocalRepo implements SaveTasksDataSource {
 
-    private static TasksLocalRepo instance;
+    private static SaveTasksLocalRepo instance;
 
-    public static TasksLocalRepo newInstance() {
-        instance = new TasksLocalRepo();
+    public static SaveTasksLocalRepo newInstance() {
+        instance = new SaveTasksLocalRepo();
         return instance;
     }
 
