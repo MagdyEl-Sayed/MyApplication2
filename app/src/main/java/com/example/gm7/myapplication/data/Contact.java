@@ -1,4 +1,4 @@
-package com.example.gm7.myapplication;
+package com.example.gm7.myapplication.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -22,8 +22,7 @@ public class Contact implements Parcelable {
     private String userName, userPhone;
     private int ID;
 
-     Contact() {
-    }
+     public Contact() {}
 
     public Contact(String userName, String userPhone) {
         this.userName = userName;

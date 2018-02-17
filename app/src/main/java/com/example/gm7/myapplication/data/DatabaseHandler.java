@@ -1,4 +1,4 @@
-package com.example.gm7.myapplication;
+package com.example.gm7.myapplication.data;
 
 /**
  * Created by GM7 on 27/12/2017.
@@ -13,6 +13,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
+
+import com.example.gm7.myapplication.data.Contact;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -60,9 +62,8 @@ Context context;
      */
 
     // Adding new contact
-    void addContact(Contact contact) {
+    public void addContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, contact.getUserName()); // Contact Name
         values.put(KEY_PH_NO, contact.getUserPhone()); // Contact Phone
@@ -80,7 +81,6 @@ Context context;
         List<Contact> contactList = new ArrayList<Contact>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -95,10 +95,7 @@ Context context;
                 contactList.add(contact);
             } while (cursor.moveToNext());
         }
-
         // return contact list
         return contactList;
     }
-
-
 }
